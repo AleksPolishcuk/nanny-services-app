@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import styles from "./Header.module.css";
 import { useAuth } from "@/context/AuthContext";
+import AuthModal from "@/components/AuthModal/AuthModal";
 
 export default function Header() {
   const pathname = usePathname();
@@ -161,14 +162,12 @@ export default function Header() {
         </div>
       </header>
 
-      {authOpen && (
-        <div style={{ display: "none" }}>
-          {authMode}
-          <button type="button" onClick={() => setAuthOpen(false)}>
-            close
-          </button>
-        </div>
-      )}
+      <AuthModal
+        isOpen={authOpen}
+        mode={authMode}
+        onClose={() => setAuthOpen(false)}
+        onSwitchMode={(m) => setAuthMode(m)}
+      />
     </>
   );
 }

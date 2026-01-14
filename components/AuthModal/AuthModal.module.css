@@ -1,0 +1,170 @@
+.wrap {
+  position: relative;
+  padding: 64px;
+  min-width: 438px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+  color: #111827;
+  display: grid;
+  place-items: center;
+}
+
+.title {
+  margin: 0;
+  font-weight: 500;
+font-size: 40px;
+
+
+line-height: 1.2;
+letter-spacing: -0.02em;
+color: #11101c;
+}
+
+.subtitle {
+  margin: 20px 0 0;
+ font-weight: 400;
+font-size: 16px;
+line-height: 1.25;
+  color: rgba(17, 16, 28, 0.5);
+  max-width: 438px;
+}
+
+.form {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input {
+  width: 438px;
+  height: 52px;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  padding: 16px 18px;
+  font-size: 16px;
+  line-height: 1.25;
+  outline: none;
+  box-sizing: border-box;
+  color: #11101c;
+}
+
+.input:focus {
+  border-color: rgba(16, 57, 49, 0.2);
+  box-shadow: 0 0 0 4px rgba(16, 57, 49, 0.12);
+}
+
+.inputError {
+  border-color: rgba(239, 68, 68, 0.55);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12);
+}
+
+.passwordBox {
+  position: relative;
+  width: 438px;
+}
+
+.inputPassword {
+  padding-right: 52px;
+}
+
+.eye {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.error {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(239, 68, 68, 0.95);
+}
+
+.serverError {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: rgba(239, 68, 68, 0.95);
+}
+
+.submit {
+  margin-top: 22px;
+  height: 52px;
+  border-radius: 30px;
+  border: none;
+  background: #103931;
+ font-weight: 500;
+font-size: 16px;
+ padding: 16px auto;
+line-height: 1.25;
+letter-spacing: -0.01em;
+color: #fbfbfb;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.switchRow {
+  margin-top: 6px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(17, 24, 39, 0.65);
+}
+
+.switchText {
+  margin: 0;
+}
+
+.switchBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #103931;
+  font-weight: 600;
+  padding: 0;
+}
+
+.close svg,
+.eye svg {
+  display: block;
+  stroke: black;
+  fill: none;
+}
+
+@media (max-width: 520px) {
+  .wrap {
+    padding: 40px 20px 24px;
+  }
+  .title {
+    font-size: 32px;
+  }
+}

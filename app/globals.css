@@ -6,6 +6,12 @@
   --bg-card: #fbfbfb;
 }
 
+/* *,
+*::before,
+*::after {
+  box-sizing: border-box;
+} */
+
 body {
   margin: 0;
 }
