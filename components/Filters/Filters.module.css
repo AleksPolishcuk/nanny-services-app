@@ -1,0 +1,98 @@
+.root {
+  position: relative;
+  width: 226px;
+}
+
+.label {
+  margin: 0 0 8px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.28571;
+  color: #8a8a89;
+}
+
+/* Закритий стан (кнопка) */
+.trigger {
+  width: 226px;
+  height: 48px;
+  border: none;
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: #103931;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.triggerText {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.11111;
+  color: #fbfbfb;
+  white-space: nowrap;
+}
+
+.chevron {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  color: #fbfbfb;
+  transition: transform 150ms ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* Випадаюче меню */
+.menu {
+  position: absolute;
+  left: 0;
+  width: 226px;
+  height: 244px;
+
+  margin-top: 8px;
+  padding: 14px 0;
+  list-style: none;
+
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 20px 69px 0 rgba(0, 0, 0, 0.07);
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.item {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 0 18px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.11111;
+  color: rgba(17, 16, 28, 0.3);
+
+  cursor: pointer;
+}
+
+.item:hover {
+  color: #11101c;
+}
+
+.itemActive {
+  color: #11101c;
+}
+
+.itemDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
