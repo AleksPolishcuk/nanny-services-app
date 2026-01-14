@@ -1,0 +1,160 @@
+.header {
+  width: 100%;
+  z-index: 50;
+}
+
+.headerHome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+}
+
+.headerInner {
+  background: #103931;
+  height: 88px;
+}
+
+.container {
+  max-width: 1440px;
+  padding: 20px 128px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(251, 251, 251, 0.4);
+  height: 48px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.logo {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  white-space: nowrap;
+}
+
+/* NAV */
+.nav {
+  display: none;
+  gap: 40px;
+}
+
+.navRight {
+  justify-self: end;
+  justify-content: flex-end;
+  margin-right: 96px;
+}
+
+.navLink {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  opacity: 0.85;
+}
+
+.active {
+  opacity: 1;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Buttons */
+.btnLogin {
+  border: 1px solid rgba(251, 251, 251, 0.4);
+  border-radius: 30px;
+  padding: 14px 39px;
+  width: 124px;
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btnRegister {
+  border-radius: 30px;
+  padding: 14px 40px;
+  width: 168px;
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  background: #103931;
+  border: none;
+  cursor: pointer;
+}
+
+/* Auth state */
+.userBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 6px;
+}
+
+.userIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #103931;
+}
+
+.userName {
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+}
+
+.btnLogout {
+  border: 1px solid rgba(251, 251, 251, 0.4);
+  border-radius: 30px;
+  padding: 14px 39px;
+  width: 134px;
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btnLogin:hover,
+.btnRegister:hover,
+.btnLogout:hover {
+  opacity: 0.92;
+}
+
+/* Desktop: показати nav */
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+  }
+}
