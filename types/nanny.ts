@@ -20,3 +20,13 @@ export type Nanny = {
   rating: number;
   createdAt: number;
 };
+
+export type AppointmentValues = {
+  address: string;
+  phone: string;
+  childAge: string;
+  time: string;
+  email: string;
+  parentName: string;
+  comment: string;
+};

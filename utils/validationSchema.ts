@@ -29,5 +29,16 @@ export const registerSchema = yup.object({
     .min(6, "Password must be at least 6 characters"),
 });
 
+export const appointmentSchema = yup.object({
+  parentName: yup.string().required("Required"),
+  email: yup.string().email("Invalid email").required("Required"),
+  phone: yup.string().required("Required"),
+  address: yup.string().required("Required"),
+  childAge: yup.string().required("Required"),
+  time: yup.string().required("Required"),
+  comment: yup.string().required("Required"),
+});
+
 export type LoginFormValues = yup.InferType<typeof loginSchema>;
 export type RegisterFormValues = yup.InferType<typeof registerSchema>;
+export type AppointmentFormValues = yup.InferType<typeof appointmentSchema>;
