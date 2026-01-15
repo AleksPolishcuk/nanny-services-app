@@ -5,6 +5,8 @@ import { useMemo, useState } from "react";
 import styles from "./NannyCard.module.css";
 import type { Nanny } from "@/types/nanny";
 import AppointmentModal from "@/components/AppointmentModal/AppointmentModal";
+import { useFavorites } from "@/context/FavoritesContext";
+import { useAuth } from "@/context/AuthContext";
 
 type Props = {
   nanny: Nanny;
@@ -21,10 +23,36 @@ function getAge(birthdayISO: string) {
 
 export default function NannyCard({ nanny }: Props) {
   const [expanded, setExpanded] = useState(false);
-  const [isFav, setIsFav] = useState(false);
   const [apptOpen, setApptOpen] = useState(false);
 
+  const { user } = useAuth();
+  const isAuthenticated = !!user;
+
+  const { isFav, toggle } = useFavorites();
+  console.log("NannyCard render", nanny.id);
+  const fav = isFav(nanny.id);
+
   const age = useMemo(() => getAge(nanny.birthday), [nanny.birthday]);
+
+  const onHeartClick = async () => {
+    console.log("HEART CLICK", {
+      nannyId: nanny.id,
+      isAuthenticated,
+      uid: user?.uid ?? null,
+    });
+
+    if (!isAuthenticated) {
+      alert("This feature is available only for authorized users.");
+      return;
+    }
+
+    try {
+      await toggle(nanny.id);
+      console.log("TOGGLE OK", nanny.id);
+    } catch (e) {
+      console.error("TOGGLE FAIL", e);
+    }
+  };
 
   return (
     <article className={styles.card}>
@@ -92,13 +120,13 @@ export default function NannyCard({ nanny }: Props) {
             <button
               type="button"
               className={styles.heartBtn}
-              onClick={() => setIsFav((s) => !s)}
-              aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
+              onClick={onHeartClick}
+              aria-label={fav ? "Remove from favorites" : "Add to favorites"}
             >
               <svg width="26" height="26" aria-hidden="true">
                 <use
                   href={`/sprite.svg#${
-                    isFav
+                    fav
                       ? "icon-Property-heartActive"
                       : "icon-Property-heart1Default"
                   }`}

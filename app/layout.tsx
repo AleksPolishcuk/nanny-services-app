@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import Header from "@/components/Header/Header";
+import { FavoritesProvider } from "@/context/FavoritesContext";
+import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Nanny.Services",
@@ -18,7 +20,8 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <Header />
-          {children}
+          <FavoritesProvider>{children}</FavoritesProvider>
+          <Footer />
         </AuthProvider>
       </body>
     </html>
