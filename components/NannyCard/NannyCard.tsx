@@ -50,39 +50,44 @@ export default function NannyCard({ nanny }: Props) {
           </div>
 
           <div className={styles.meta}>
-            <span className={styles.metaItem}>
-              <svg
-                className={styles.metaIcon}
-                width="16"
-                height="16"
-                aria-hidden="true"
-              >
-                <use href="/sprite.svg#icon-Location" />
-              </svg>
-              {nanny.location}
-            </span>
+            <div className={styles.metaInfo}>
+              <span className={styles.metaItem}>
+                <svg
+                  className={styles.metaIcon}
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use href="/sprite.svg#icon-Location" />
+                </svg>
+                {nanny.location}
+              </span>
 
-            <span className={styles.sep} aria-hidden="true" />
+              <span className={styles.metaSep} aria-hidden="true">
+                |
+              </span>
 
-            <span className={styles.metaItem}>
-              <svg
-                className={styles.starIcon}
-                width="16"
-                height="16"
-                aria-hidden="true"
-              >
-                <use href="/sprite.svg#icon-star" />
-              </svg>
-              Rating:{" "}
-              <strong className={styles.metaStrong}>{nanny.rating}</strong>
-            </span>
+              <span className={styles.metaItem}>
+                <svg
+                  className={styles.starIcon}
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use href="/sprite.svg#icon-star" />
+                </svg>
+                Rating: <span className={styles.metaValue}>{nanny.rating}</span>
+              </span>
 
-            <span className={styles.sep} aria-hidden="true" />
+              <span className={styles.metaSep} aria-hidden="true">
+                |
+              </span>
 
-            <span className={styles.metaItem}>
-              Price / 1 hour:{" "}
-              <strong className={styles.price}>{nanny.price_per_hour}$</strong>
-            </span>
+              <span className={styles.metaItem}>
+                Price / 1 hour:{" "}
+                <span className={styles.price}>{nanny.price_per_hour}$</span>
+              </span>
+            </div>
 
             <button
               type="button"
@@ -104,31 +109,35 @@ export default function NannyCard({ nanny }: Props) {
         </div>
 
         <div className={styles.chips}>
-          <span className={styles.chip}>
-            Age: <strong className={styles.chipStrong}>{age}</strong>
-          </span>
+          <div className={styles.chipsRow}>
+            <span className={styles.chip}>
+              Age: <strong className={styles.chipStrong}>{age}</strong>
+            </span>
 
-          <span className={styles.chip}>
-            Experience:{" "}
-            <strong className={styles.chipStrong}>{nanny.experience}</strong>
-          </span>
+            <span className={styles.chip}>
+              Experience:{" "}
+              <strong className={styles.chipStrong}>{nanny.experience}</strong>
+            </span>
 
-          <span className={styles.chip}>
-            Kids Age:{" "}
-            <strong className={styles.chipStrong}>{nanny.kids_age}</strong>
-          </span>
+            <span className={styles.chip}>
+              Kids Age:{" "}
+              <strong className={styles.chipStrong}>{nanny.kids_age}</strong>
+            </span>
 
-          <span className={styles.chip}>
-            Characters:{" "}
-            <strong className={styles.chipStrong}>
-              {nanny.characters.join(", ")}
-            </strong>
-          </span>
+            <span className={styles.chip}>
+              Characters:{" "}
+              <strong className={styles.chipStrong}>
+                {nanny.characters.join(", ")}
+              </strong>
+            </span>
+          </div>
 
-          <span className={styles.chip}>
-            Education:{" "}
-            <strong className={styles.chipStrong}>{nanny.education}</strong>
-          </span>
+          <div className={styles.chipsRow}>
+            <span className={styles.chip}>
+              Education:{" "}
+              <strong className={styles.chipStrong}>{nanny.education}</strong>
+            </span>
+          </div>
         </div>
 
         <p className={styles.about}>
