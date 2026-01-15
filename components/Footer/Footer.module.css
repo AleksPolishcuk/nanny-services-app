@@ -1,0 +1,19 @@
+.footer {
+  width: 100%;
+  z-index: 50;
+}
+
+.container {
+  max-width: 1440px;
+  background: #103931;
+  border-radius: 30px;
+  height: 88px;
+  padding: 20px 128px;
+  margin: 0 auto;
+}
+
+.text {
+  display: block;
+
+  color: #fbfbfb;
+}

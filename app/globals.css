@@ -1,9 +1,51 @@
 :root {
-  --font-family: "Helvetica Neue", sans-serif;
+  --font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --bg-green: #103931;
+  /* Основні кольори теми */
+  --primary-dark: #103931;
+  --primary-light: #1a4d43;
+  --primary-lighter: #2a6e5d;
+
+  /* Фон та текст */
   --bg-page: #f3f3f3;
-  --bg-card: #fbfbfb;
+  --bg-card: #ffffff;
+  --text-primary: #11101c;
+  --text-secondary: rgba(17, 16, 28, 0.5);
+  --text-light: #fbfbfb;
+
+  /* Акцентні */
+  --accent-green: #38cd3e;
+  --accent-star: #f4b400;
+  --accent-red: #f03f3b;
+  --accent-blue: #0957c3;
+
+  /* Границі та тіні */
+  --border-light: rgba(17, 16, 28, 0.1);
+  --border-dark: rgba(251, 251, 251, 0.4);
+  --shadow: 0 20px 69px rgba(0, 0, 0, 0.07);
+}
+
+/* Застосувати скрізь */
+.btnRegister,
+.appointmentBtn,
+.loadMore,
+.trigger {
+  background: var(--primary-dark);
+  color: var(--text-light);
+}
+
+.btnRegister:hover,
+.appointmentBtn:hover,
+.loadMore:hover {
+  background: var(--primary-light);
+}
+
+.headerInner {
+  background: var(--primary-dark);
+}
+
+.left {
+  background: var(--primary-dark);
 }
 
 /* *,
