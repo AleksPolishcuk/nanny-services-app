@@ -4,12 +4,15 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import styles from "./NannyCard.module.css";
 import type { Nanny } from "@/types/nanny";
-import AppointmentModal from "@/components/AppointmentModal/AppointmentModal";
+import AppointmentModal from "@/components/Modal/AppointmentModal/AppointmentModal";
+import UnauthorizedModal from "@/components/Modal/UnauthorizedModal/UnauthorizedModal";
 import { useFavorites } from "@/context/FavoritesContext";
 import { useAuth } from "@/context/AuthContext";
 
 type Props = {
   nanny: Nanny;
+  onOpenLogin?: () => void;
+  onOpenRegister?: () => void;
 };
 
 function getAge(birthdayISO: string) {
@@ -21,34 +24,31 @@ function getAge(birthdayISO: string) {
   return age;
 }
 
-export default function NannyCard({ nanny }: Props) {
+export default function NannyCard({
+  nanny,
+  onOpenLogin,
+  onOpenRegister,
+}: Props) {
   const [expanded, setExpanded] = useState(false);
   const [apptOpen, setApptOpen] = useState(false);
+  const [unauthOpen, setUnauthOpen] = useState(false);
 
   const { user } = useAuth();
   const isAuthenticated = !!user;
 
   const { isFav, toggle } = useFavorites();
-  console.log("NannyCard render", nanny.id);
   const fav = isFav(nanny.id);
 
   const age = useMemo(() => getAge(nanny.birthday), [nanny.birthday]);
 
   const onHeartClick = async () => {
-    console.log("HEART CLICK", {
-      nannyId: nanny.id,
-      isAuthenticated,
-      uid: user?.uid ?? null,
-    });
-
     if (!isAuthenticated) {
-      alert("This feature is available only for authorized users.");
+      setUnauthOpen(true);
       return;
     }
 
     try {
       await toggle(nanny.id);
-      console.log("TOGGLE OK", nanny.id);
     } catch (e) {
       console.error("TOGGLE FAIL", e);
     }
@@ -116,23 +116,36 @@ export default function NannyCard({ nanny }: Props) {
                 <span className={styles.price}>{nanny.price_per_hour}$</span>
               </span>
             </div>
-
-            <button
-              type="button"
-              className={styles.heartBtn}
-              onClick={onHeartClick}
-              aria-label={fav ? "Remove from favorites" : "Add to favorites"}
-            >
-              <svg width="26" height="26" aria-hidden="true">
-                <use
-                  href={`/sprite.svg#${
-                    fav
-                      ? "icon-Property-heartActive"
-                      : "icon-Property-heart1Default"
-                  }`}
-                />
-              </svg>
-            </button>
+            <>
+              <button
+                type="button"
+                className={styles.heartBtn}
+                onClick={onHeartClick}
+                aria-label={fav ? "Remove from favorites" : "Add to favorites"}
+              >
+                <svg width="26" height="26" aria-hidden="true">
+                  <use
+                    href={`/sprite.svg#${
+                      fav
+                        ? "icon-Property-heartActive"
+                        : "icon-Property-heart1Default"
+                    }`}
+                  />
+                </svg>
+              </button>
+              <UnauthorizedModal
+                isOpen={unauthOpen}
+                onClose={() => setUnauthOpen(false)}
+                onOpenLogin={() => {
+                  setUnauthOpen(false);
+                  onOpenLogin?.();
+                }}
+                onOpenRegister={() => {
+                  setUnauthOpen(false);
+                  onOpenRegister?.();
+                }}
+              />
+            </>
           </div>
         </div>
 

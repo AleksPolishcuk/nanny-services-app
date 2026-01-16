@@ -1,0 +1,119 @@
+.wrap {
+  position: relative;
+  padding: 64px;
+  width: 438px;
+  background: #fbfbfb;
+  border-radius: 30px;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: #11101c;
+}
+
+.close:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s;
+}
+
+.close:active {
+  transform: scale(0.95);
+  transition: transform 0.1s;
+}
+
+.iconContainer {
+  margin-bottom: 24px;
+}
+
+.icon {
+  color: #103931;
+  opacity: 0.8;
+}
+
+.title {
+  margin: 0 0 16px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #11101c;
+}
+
+.description {
+  margin: 0 0 32px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(17, 16, 28, 0.6);
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.btnLogin {
+  border: 1px solid rgba(16, 57, 49, 0.4);
+  border-radius: 30px;
+  padding: 14px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #103931;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btnRegister {
+  border-radius: 30px;
+  padding: 14px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  background: #103931;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btnLogin:hover,
+.btnRegister:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: all 0.2s;
+}
+
+@media (max-width: 520px) {
+  .wrap {
+    width: 100%;
+    padding: 40px 20px 24px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+}
