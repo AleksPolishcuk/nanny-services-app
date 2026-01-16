@@ -158,7 +158,6 @@ export default function Header() {
             )}
           </div>
 
-          {/* Мобільне меню (показується тільки до 767px) */}
           <MobileMenu
             isOpen={mobileMenuOpen}
             onToggle={() => setMobileMenuOpen(!mobileMenuOpen)}

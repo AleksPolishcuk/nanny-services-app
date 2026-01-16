@@ -1,45 +1,20 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import styles from "./favorites.module.css";
 import { useAuth } from "@/context/AuthContext";
 import { useFavorites } from "@/context/FavoritesContext";
-import { getNanniesByIds } from "@/service/firebase/favirites";
 import NannyCard from "@/components/NannyCard/NannyCard";
-import type { Nanny } from "@/types/nanny";
 
 export default function FavoritesPage() {
   const { user, isAuthLoading } = useAuth();
   const isAuthenticated = !!user;
 
-  const { ids, loading: favLoading } = useFavorites();
-
-  const [items, setItems] = useState<Nanny[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      setItems([]);
-      setLoading(false);
-      return;
-    }
-
-    const run = async () => {
-      setLoading(true);
-      try {
-        const res = await getNanniesByIds(ids);
-        setItems(res);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    void run();
-  }, [ids, isAuthenticated]);
+  const { nannies, loading: favLoading } = useFavorites();
 
   const empty = useMemo(
-    () => !loading && items.length === 0,
-    [loading, items.length]
+    () => !favLoading && nannies.length === 0,
+    [favLoading, nannies.length]
   );
 
   if (isAuthLoading) {
@@ -67,13 +42,13 @@ export default function FavoritesPage() {
       <div className={styles.container}>
         <h1 className={styles.title}>Favorites</h1>
 
-        {loading || favLoading ? (
+        {favLoading ? (
           <p className={styles.state}>Loading…</p>
         ) : empty ? (
           <p className={styles.state}>No favorites yet.</p>
         ) : (
           <section className={styles.list}>
-            {items.map((n) => (
+            {nannies.map((n) => (
               <NannyCard key={n.id} nanny={n} />
             ))}
           </section>
