@@ -1,8 +1,280 @@
+/* ========== MOBILE FIRST (320px+) ========== */
 .header {
   width: 100%;
+  position: relative;
   z-index: 50;
 }
 
+/* Базовий контейнер для мобільних */
+.container {
+  padding: 0 16px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Лого для мобільних */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
+}
+
+/* Бургер-меню для мобільних */
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 100;
+}
+
+.burgerLine {
+  width: 100%;
+  height: 3px;
+  background: #fbfbfb;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.burger.open .burgerLine:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.burger.open .burgerLine:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open .burgerLine:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Кнопки для мобільних - приховані */
+.btnLogin,
+.btnRegister,
+.btnLogout {
+  display: none;
+}
+
+/* Авторизований користувач (мобільна версія) - прихований */
+.userBox {
+  display: none;
+}
+
+/* Ховаємо десктопні елементи на мобільних */
+.nav,
+.actions {
+  display: none !important;
+}
+
+/* ========== TABLET (768px+) ========== */
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 0 32px;
+    height: 80px;
+  }
+
+  .logo img {
+    width: 110px;
+  }
+
+  /* На планшетах ТЕЖ показуємо бургер (не показуємо кнопки) */
+  .burger {
+    display: flex !important;
+  }
+
+  /* Кнопки на планшетах приховані */
+  .btnLogin,
+  .btnRegister,
+  .btnLogout {
+    display: none;
+  }
+
+  /* Ім'я користувача на планшетах приховане */
+  .userName {
+    display: none;
+  }
+
+  /* Дії на планшетах приховані */
+  .actions {
+    display: none !important;
+  }
+}
+
+/* ========== DESKTOP (1024px+) ========== */
+@media screen and (min-width: 1024px) {
+  .container {
+    padding: 0 64px;
+    height: 88px;
+    /* Переходимо на grid для десктопа */
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+  }
+
+  .logo img {
+    width: 120px;
+  }
+
+  /* На десктопі ховаємо бургер */
+  .burger {
+    display: none !important;
+  }
+
+  /* Показуємо навігацію на десктопі */
+  .nav {
+    display: flex !important;
+    gap: 40px;
+    justify-content: flex-end;
+    padding-right: 92px;
+  }
+
+  .navWithUser {
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  /* Стилі для навігаційних посилань */
+  .navLink {
+    position: relative;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: #fbfbfb;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+    padding: 0 0 4px;
+  }
+
+  .navLink:hover {
+    opacity: 1;
+  }
+
+  .navLink.active {
+    opacity: 1;
+  }
+
+  /* Крапка-індикатор */
+  .navLink.active::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: #fbfbfb;
+    border-radius: 50%;
+  }
+
+  /* Показуємо кнопки на десктопі */
+  .btnLogin,
+  .btnRegister,
+  .btnLogout {
+    display: block;
+    border-radius: 30px;
+    padding: 14px 20px;
+    height: 48px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: fit-content;
+    white-space: nowrap;
+  }
+
+  .btnLogin {
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    background: transparent;
+    color: #fbfbfb;
+  }
+
+  .btnRegister {
+    background: #fbfbfb;
+    color: #103931;
+    border: none;
+  }
+
+  .btnLogout {
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    background: transparent;
+    color: #fbfbfb;
+  }
+
+  .actions {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    justify-self: end;
+  }
+
+  /* Показуємо юзербокс на десктопі */
+  .userBox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 20px;
+  }
+
+  .userIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #103931;
+    flex-shrink: 0;
+  }
+
+  .userName {
+    display: inline-block;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: #fbfbfb;
+  }
+}
+
+/* ========== LARGE DESKTOP (1280px+) ========== */
+@media screen and (min-width: 1280px) {
+  .container {
+    padding: 0 96px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
+
+/* ========== FULL HD (1440px+) ========== */
+@media screen and (min-width: 1440px) {
+  .container {
+    padding: 0 128px;
+  }
+}
+
+/* ========== СТИЛІ ДЛЯ РІЗНИХ СТОРІНОК ========== */
+
+/* СТИЛЬ 1: Home сторінка (неавторизований) */
 .headerHome {
   position: absolute;
   top: 0;
@@ -11,154 +283,68 @@
   background: transparent;
 }
 
+.headerHome .container {
+  border-bottom: 1px solid rgba(251, 251, 251, 0.4);
+}
+
+.headerHome .navLink {
+  color: #fbfbfb;
+}
+
+.headerHome .btnLogin {
+  border: 1px solid rgba(251, 251, 251, 0.4);
+  background: transparent;
+  color: #fbfbfb;
+}
+
+.headerHome .btnRegister {
+  background: #103931;
+  color: #fbfbfb;
+  border: none;
+}
+
+/* СТИЛЬ 2: Nannies сторінка (неавторизований) */
 .headerInner {
   background: #103931;
-  height: 88px;
+  height: 72px; /* Мобільна висота */
 }
 
-.container {
-  max-width: 1440px;
-  padding: 20px 128px;
-  margin: 0 auto;
-  border-bottom: 1px solid rgba(251, 251, 251, 0.4);
-  height: 48px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
+@media screen and (min-width: 768px) {
+  .headerInner {
+    height: 80px; /* Планшетна висота */
+  }
 }
 
-.logo {
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: -0.01em;
+@media screen and (min-width: 1024px) {
+  .headerInner {
+    height: 88px; /* Десктопна висота */
+  }
+}
+
+.headerInner .container {
+  border-bottom: none;
+}
+
+.headerInner .navLink {
   color: #fbfbfb;
-  white-space: nowrap;
 }
 
-/* NAV */
-.nav {
-  display: none;
-  gap: 40px;
-}
-
-.navRight {
-  justify-self: end;
-  justify-content: flex-end;
-  margin-right: 96px;
-}
-
-.navLink {
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #fbfbfb;
-  opacity: 0.85;
-}
-
-.navLink:hover {
-  transform: scale(1.05);
-  transition: transform 0.2s;
-}
-.active {
-  opacity: 1;
-}
-
-/* ACTIONS */
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Buttons */
-.btnLogin {
+.headerInner .btnLogin {
   border: 1px solid rgba(251, 251, 251, 0.4);
-  border-radius: 30px;
-  padding: 14px 39px;
-  width: 124px;
-  height: 48px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #fbfbfb;
   background: transparent;
-  cursor: pointer;
-}
-
-.btnRegister {
-  border-radius: 30px;
-  padding: 14px 40px;
-  width: 168px;
-  height: 48px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
   color: #fbfbfb;
-  background: #103931;
-  border: none;
-  cursor: pointer;
 }
 
-/* Auth state */
-.userBox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-right: 6px;
-}
-
-.userIcon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.headerInner .btnRegister {
+  background: #fbfbfb;
   color: #103931;
+  border: none;
 }
 
-.userName {
-  max-width: 140px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #fbfbfb;
-}
-
-.btnLogout {
-  border: 1px solid rgba(251, 251, 251, 0.4);
-  border-radius: 30px;
-  padding: 14px 39px;
-  width: 134px;
-  height: 48px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #fbfbfb;
-  background: transparent;
-  cursor: pointer;
-}
-
+/* Ховер ефекти для всіх кнопок */
 .btnLogin:hover,
 .btnRegister:hover,
 .btnLogout:hover {
-  opacity: 0.92;
-}
-
-/* Desktop: показати nav */
-@media (min-width: 768px) {
-  .nav {
-    display: flex;
-  }
+  opacity: 0.9;
+  transform: scale(1.02);
 }
