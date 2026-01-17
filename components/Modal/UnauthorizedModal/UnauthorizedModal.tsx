@@ -2,28 +2,24 @@
 
 import Modal from "@/components/Modal/Modal";
 import styles from "./UnauthorizedModal.module.css";
+import { useModal } from "@/context/ModalContext";
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  onOpenLogin?: () => void;
-  onOpenRegister?: () => void;
 };
 
-export default function UnauthorizedModal({
-  isOpen,
-  onClose,
-  onOpenLogin,
-  onOpenRegister,
-}: Props) {
+export default function UnauthorizedModal({ isOpen, onClose }: Props) {
+  const { openModal } = useModal();
+
   const handleLoginClick = () => {
     onClose();
-    onOpenLogin?.();
+    openModal("login");
   };
 
   const handleRegisterClick = () => {
     onClose();
-    onOpenRegister?.();
+    openModal("register");
   };
 
   return (
@@ -63,7 +59,6 @@ export default function UnauthorizedModal({
             type="button"
             className={styles.btnLogin}
             onClick={handleLoginClick}
-            disabled={!onOpenLogin}
           >
             Log In
           </button>
@@ -72,7 +67,6 @@ export default function UnauthorizedModal({
             type="button"
             className={styles.btnRegister}
             onClick={handleRegisterClick}
-            disabled={!onOpenRegister}
           >
             Registration
           </button>

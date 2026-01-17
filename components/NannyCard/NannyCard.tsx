@@ -4,15 +4,12 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import styles from "./NannyCard.module.css";
 import type { Nanny } from "@/types/nanny";
-import AppointmentModal from "@/components/Modal/AppointmentModal/AppointmentModal";
-import UnauthorizedModal from "@/components/Modal/UnauthorizedModal/UnauthorizedModal";
 import { useFavorites } from "@/context/FavoritesContext";
 import { useAuth } from "@/context/AuthContext";
+import { useModal } from "@/context/ModalContext";
 
 type Props = {
   nanny: Nanny;
-  onOpenLogin?: () => void;
-  onOpenRegister?: () => void;
 };
 
 function getAge(birthdayISO: string) {
@@ -24,18 +21,13 @@ function getAge(birthdayISO: string) {
   return age;
 }
 
-export default function NannyCard({
-  nanny,
-  onOpenLogin,
-  onOpenRegister,
-}: Props) {
+export default function NannyCard({ nanny }: Props) {
   const [expanded, setExpanded] = useState(false);
-  const [apptOpen, setApptOpen] = useState(false);
-  const [unauthOpen, setUnauthOpen] = useState(false);
 
   const { user } = useAuth();
   const isAuthenticated = !!user;
 
+  const { openModal } = useModal();
   const { isFav, toggle } = useFavorites();
   const fav = isFav(nanny.id);
 
@@ -43,7 +35,7 @@ export default function NannyCard({
 
   const onHeartClick = async () => {
     if (!isAuthenticated) {
-      setUnauthOpen(true);
+      openModal("unauthorized");
       return;
     }
 
@@ -52,6 +44,13 @@ export default function NannyCard({
     } catch (e) {
       console.error("TOGGLE FAIL", e);
     }
+  };
+
+  const handleMakeAppointment = () => {
+    openModal("appointment", {
+      nannyName: nanny.name,
+      nannyAvatarUrl: nanny.avatar_url,
+    });
   };
 
   return (
@@ -133,18 +132,6 @@ export default function NannyCard({
                   />
                 </svg>
               </button>
-              <UnauthorizedModal
-                isOpen={unauthOpen}
-                onClose={() => setUnauthOpen(false)}
-                onOpenLogin={() => {
-                  setUnauthOpen(false);
-                  onOpenLogin?.();
-                }}
-                onOpenRegister={() => {
-                  setUnauthOpen(false);
-                  onOpenRegister?.();
-                }}
-              />
             </>
           </div>
         </div>
@@ -226,17 +213,10 @@ export default function NannyCard({
             <button
               type="button"
               className={styles.appointmentBtn}
-              onClick={() => setApptOpen(true)}
+              onClick={handleMakeAppointment}
             >
               Make an appointment
             </button>
-
-            <AppointmentModal
-              isOpen={apptOpen}
-              onClose={() => setApptOpen(false)}
-              nannyName={nanny.name}
-              nannyAvatarUrl={nanny.avatar_url}
-            />
           </>
         )}
       </div>
