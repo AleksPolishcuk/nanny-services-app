@@ -1,28 +1,78 @@
 .page {
-  background: #f3f3f3;
-  padding: 40px 0;
+  background: #f3f5f7;
+  min-height: calc(100vh - 64px);
+  padding: 0;
 }
 
 .container {
-  max-width: 1184px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
-.title {
-  margin: 0 0 24px;
-  font-weight: 500;
-  font-size: 24px;
-  color: #11101c;
+.filters {
+  padding-top: 64px;
 }
 
 .list {
+  margin-top: 32px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
 }
 
 .state {
-  margin: 0;
+  margin: 24px 0;
+  opacity: 0.75;
   color: rgba(17, 16, 28, 0.6);
+}
+
+.bottom {
+  display: flex;
+  justify-content: center;
+  padding: 18px 0 6px;
+}
+
+.loadMore {
+  border-radius: 30px;
+  padding: 14px 40px;
+  width: 159px;
+  height: 48px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  background: #103931;
+  border: none;
+  margin: 64px auto 100px;
+}
+
+.loadMore:hover {
+  background-color: #1a4d43;
+  transform: scale(1.03);
+  transition: transform 0.2s;
+}
+
+.loadMore:active {
+  transform: scale(0.97);
+  transition: transform 0.1s;
+  background-color: #0a2c26;
+}
+
+.loadMore:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.end {
+  margin: 18px 0 0;
+  opacity: 0.6;
+}
+
+@media (max-width: 1024px) {
+  .filters {
+    padding-top: 20px;
+  }
 }
