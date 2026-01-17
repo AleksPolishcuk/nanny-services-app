@@ -19,7 +19,7 @@ const OPTIONS: { value: FilterOption; label: string }[] = [
   { value: "ALL", label: "Show all" },
 ];
 
-export default function Filters({ value, onChange }: Props) {
+export default function Filter({ value, onChange }: Props) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
 
@@ -89,10 +89,8 @@ export default function Filters({ value, onChange }: Props) {
                   className={[
                     styles.item,
                     isActive ? styles.itemActive : "",
-                    // opt.disabled ? styles.itemDisabled : "",
                   ].join(" ")}
                   onClick={() => handleSelect(opt.value)}
-                  //   disabled={opt.disabled}
                   role="option"
                   aria-selected={isActive}
                 >

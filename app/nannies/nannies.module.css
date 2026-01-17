@@ -6,6 +6,7 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 16px 64px;
 }
 
 .layout {
@@ -78,7 +79,7 @@
   color: #fbfbfb;
   background: #103931;
   color: #fbfbfb;
-  margin: 64px auto 100px;
+  margin: 64px auto 36px;
 }
 
 .loadMore:hover {

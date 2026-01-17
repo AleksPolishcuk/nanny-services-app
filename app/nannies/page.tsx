@@ -5,7 +5,7 @@ import styles from "./nannies.module.css";
 import type { Nanny } from "@/types/nanny";
 import { getNanniesPage, type NanniesCursor } from "@/service/firebase/rtdb";
 import NannyCard from "@/components/NannyCard/NannyCard";
-import SortSelect from "@/components/Filters/Filters";
+import Filter from "@/components/Filters/Filters";
 import type { PriceFilter, SortOption, FilterOption } from "@/types/filters";
 import { applyFiltersAndSort } from "@/utils/sortNannies";
 
@@ -71,14 +71,13 @@ export default function NanniesPage() {
 
   useEffect(() => {
     void loadFirst();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <main className={styles.page}>
       <div className={styles.container}>
         <div className={styles.filters}>
-          <SortSelect value={uiValue} onChange={onFilterChange} />
+          <Filter value={uiValue} onChange={onFilterChange} />
         </div>
 
         {firstLoading ? (
@@ -93,20 +92,16 @@ export default function NanniesPage() {
           </section>
         )}
 
-        {visibleItems.length > 0 && (
+        {hasMore && visibleItems.length > 0 && (
           <div className={styles.bottom}>
-            {hasMore ? (
-              <button
-                className={styles.loadMore}
-                type="button"
-                onClick={loadMore}
-                disabled={loading}
-              >
-                {loading ? "Loading…" : "Load more"}
-              </button>
-            ) : (
-              <p className={styles.end}>End of list</p>
-            )}
+            <button
+              type="button"
+              className={styles.loadMore}
+              onClick={loadMore}
+              disabled={loading}
+            >
+              {loading ? "Loading…" : "Load more"}
+            </button>
           </div>
         )}
       </div>
