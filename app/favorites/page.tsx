@@ -5,6 +5,7 @@ import styles from "./favorites.module.css";
 import { useAuth } from "@/context/AuthContext";
 import { useFavorites } from "@/context/FavoritesContext";
 import NannyCard from "@/components/NannyCard/NannyCard";
+import Filters from "@/components/Filters/Filters";
 
 export default function FavoritesPage() {
   const { user, isAuthLoading } = useAuth();
@@ -40,8 +41,6 @@ export default function FavoritesPage() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <h1 className={styles.title}>Favorites</h1>
-
         {favLoading ? (
           <p className={styles.state}>Loading…</p>
         ) : empty ? (
