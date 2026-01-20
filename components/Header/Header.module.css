@@ -1,228 +1,184 @@
-/* ========== MOBILE FIRST (320px+) ========== */
+/* ========== BASE (320+) ========== */
 .header {
   width: 100%;
   position: relative;
   z-index: 50;
 }
 
-/* Базовий контейнер для мобільних */
-.container {
-  padding: 0 16px;
-  height: 72px;
+.inner {
+  height: var(--header-h-mobile);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  padding: 0 var(--pad-xs);
 }
 
-/* Лого для мобільних */
 .logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo img {
+  display: block;
   width: 100px;
   height: auto;
 }
 
-/* Бургер-меню для мобільних */
-.burger {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 24px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 100;
-}
-
-.burgerLine {
-  width: 100%;
-  height: 3px;
-  background: #fbfbfb;
-  border-radius: 3px;
-  transition: all 0.3s ease;
-}
-
-.burger.open .burgerLine:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
-}
-
-.burger.open .burgerLine:nth-child(2) {
-  opacity: 0;
-}
-
-.burger.open .burgerLine:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -7px);
-}
-
-/* Кнопки для мобільних - приховані */
-.btnLogin,
-.btnRegister,
-.btnLogout {
-  display: none;
-}
-
-/* Авторизований користувач (мобільна версія) - прихований */
-.userBox {
-  display: none;
-}
-
-/* Ховаємо десктопні елементи на мобільних */
 .nav,
 .actions {
-  display: none !important;
+  display: none;
 }
 
-/* ========== TABLET (768px+) ========== */
-@media screen and (min-width: 768px) {
-  .container {
+/* ========== ROUTE VARIANTS ========== */
+
+.headerInner {
+  background: var(--primary-dark);
+}
+
+.headerHome {
+  position: absolute;
+  inset: 0 0 auto 0;
+  background: transparent;
+}
+
+.headerHome .inner {
+  height: var(--home-header-h, var(--header-h-mobile));
+  padding: 0 24px;
+}
+
+.headerInner .inner {
+  height: var(--header-h-mobile);
+}
+
+/* ========== TABLET (768+) ========== */
+@media (min-width: 768px) {
+  .inner {
+    height: var(--header-h-tablet);
+    padding: 0 var(--pad-sm);
+  }
+
+  .logo {
+    width: 168px;
+  }
+
+  .headerHome .inner {
     padding: 0 32px;
-    height: 80px;
-  }
-
-  .logo img {
-    width: 110px;
-  }
-
-  /* На планшетах ТЕЖ показуємо бургер (не показуємо кнопки) */
-  .burger {
-    display: flex !important;
-  }
-
-  /* Кнопки на планшетах приховані */
-  .btnLogin,
-  .btnRegister,
-  .btnLogout {
-    display: none;
-  }
-
-  /* Ім'я користувача на планшетах приховане */
-  .userName {
-    display: none;
-  }
-
-  /* Дії на планшетах приховані */
-  .actions {
-    display: none !important;
   }
 }
 
-/* ========== DESKTOP (1024px+) ========== */
-@media screen and (min-width: 1024px) {
-  .container {
-    padding: 0 64px;
-    height: 88px;
-    /* Переходимо на grid для десктопа */
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-  }
-
-  .logo img {
-    width: 120px;
-  }
-
-  /* На десктопі ховаємо бургер */
-  .burger {
-    display: none !important;
-  }
-
-  /* Показуємо навігацію на десктопі */
+/* ========== DESKTOP (1024+) ========== */
+@media (min-width: 1024px) {
   .nav {
-    display: flex !important;
+    display: flex;
     gap: 40px;
-    justify-content: flex-end;
-    padding-right: 92px;
-  }
-
-  .navWithUser {
-    justify-content: center;
-    padding-right: 0;
-  }
-
-  /* Стилі для навігаційних посилань */
-  .navLink {
-    position: relative;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    color: #fbfbfb;
-    opacity: 0.85;
-    transition: opacity 0.2s;
-    padding: 0 0 4px;
-  }
-
-  .navLink:hover {
-    opacity: 1;
-  }
-
-  .navLink.active {
-    opacity: 1;
-  }
-
-  /* Крапка-індикатор */
-  .navLink.active::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 8px;
-    height: 8px;
-    background-color: #fbfbfb;
-    border-radius: 50%;
-  }
-
-  /* Показуємо кнопки на десктопі */
-  .btnLogin,
-  .btnRegister,
-  .btnLogout {
-    display: block;
-    border-radius: 30px;
-    padding: 14px 20px;
-    height: 48px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    cursor: pointer;
-    transition: all 0.2s;
-    min-width: fit-content;
-    white-space: nowrap;
-  }
-
-  .btnLogin {
-    border: 1px solid rgba(251, 251, 251, 0.4);
-    background: transparent;
-    color: #fbfbfb;
-  }
-
-  .btnRegister {
-    background: #fbfbfb;
-    color: #103931;
-    border: none;
-  }
-
-  .btnLogout {
-    border: 1px solid rgba(251, 251, 251, 0.4);
-    background: transparent;
-    color: #fbfbfb;
   }
 
   .actions {
-    display: flex !important;
+    display: flex;
     align-items: center;
     gap: 8px;
     justify-self: end;
   }
 
-  /* Показуємо юзербокс на десктопі */
+  .inner {
+    padding: 0 var(--pad-md);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    position: relative;
+  }
+  .headerHome .inner {
+    padding: 42px 80px 0;
+  }
+
+  .navRight {
+    justify-content: end;
+    margin-right: 92px;
+  }
+
+  .navCenter {
+    justify-content: center;
+  }
+
+  .navLink {
+    position: relative;
+    padding-bottom: 4px;
+
+    font-weight: var(--fw-regular);
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+
+    color: var(--text-light);
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+    text-decoration: none;
+  }
+
+  .navLink:hover {
+    transform: scale(1.03);
+    opacity: 0.95;
+  }
+
+  .active {
+    opacity: 1;
+  }
+
+  .active::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-light);
+  }
+
+  .btnLogin,
+  .btnRegister,
+  .btnLogout {
+    height: 48px;
+    padding: 14px 40px;
+    border-radius: var(--radius-pill);
+
+    font-weight: var(--fw-medium);
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .btnLogin,
+  .btnLogout {
+    border: 1px solid var(--border-dark);
+    background: transparent;
+    color: var(--text-light);
+  }
+
+  .headerHome .btnRegister {
+    border: 0;
+    background: var(--primary-dark);
+    color: var(--text-light);
+  }
+
+  .headerInner .btnRegister {
+    border: 0;
+    background: var(--primary-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border-dark);
+  }
+
+  .btnLogin:hover,
+  .btnRegister:hover,
+  .btnLogout:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+
   .userBox {
     display: flex;
     align-items: center;
@@ -231,120 +187,39 @@
   }
 
   .userIcon {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 10px;
-    background: #ffffff;
+    background: var(--text-light);
+    color: var(--primary-dark);
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #103931;
     flex-shrink: 0;
   }
 
   .userName {
-    display: inline-block;
     max-width: 140px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-weight: 500;
+
+    font-weight: var(--fw-medium);
     font-size: 16px;
     line-height: 1.25;
     letter-spacing: -0.01em;
-    color: #fbfbfb;
+
+    color: var(--text-light);
   }
 }
 
-/* ========== LARGE DESKTOP (1280px+) ========== */
-@media screen and (min-width: 1280px) {
-  .container {
-    padding: 0 96px;
-    max-width: 1440px;
-    margin: 0 auto;
+/* ========== WIDE DESKTOP (1440+) ========== */
+@media (min-width: 1440px) {
+  .inner {
+    padding: 0 var(--pad-xl);
   }
-}
-
-/* ========== FULL HD (1440px+) ========== */
-@media screen and (min-width: 1440px) {
-  .container {
-    padding: 0 128px;
+  .headerHome .inner {
+    padding: 52px 128px 0;
   }
-}
-
-/* ========== СТИЛІ ДЛЯ РІЗНИХ СТОРІНОК ========== */
-
-/* СТИЛЬ 1: Home сторінка (неавторизований) */
-.headerHome {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: transparent;
-}
-
-.headerHome .container {
-  border-bottom: 1px solid rgba(251, 251, 251, 0.4);
-}
-
-.headerHome .navLink {
-  color: #fbfbfb;
-}
-
-.headerHome .btnLogin {
-  border: 1px solid rgba(251, 251, 251, 0.4);
-  background: transparent;
-  color: #fbfbfb;
-}
-
-.headerHome .btnRegister {
-  background: #103931;
-  color: #fbfbfb;
-  border: none;
-}
-
-/* СТИЛЬ 2: Nannies сторінка (неавторизований) */
-.headerInner {
-  background: #103931;
-  height: 72px; /* Мобільна висота */
-}
-
-@media screen and (min-width: 768px) {
-  .headerInner {
-    height: 80px; /* Планшетна висота */
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .headerInner {
-    height: 88px; /* Десктопна висота */
-  }
-}
-
-.headerInner .container {
-  border-bottom: none;
-}
-
-.headerInner .navLink {
-  color: #fbfbfb;
-}
-
-.headerInner .btnLogin {
-  border: 1px solid rgba(251, 251, 251, 0.4);
-  background: transparent;
-  color: #fbfbfb;
-}
-
-.headerInner .btnRegister {
-  background: #fbfbfb;
-  color: #103931;
-  border: none;
-}
-
-/* Ховер ефекти для всіх кнопок */
-.btnLogin:hover,
-.btnRegister:hover,
-.btnLogout:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
 }

@@ -3,14 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import styles from "./Header.module.css";
 import { useAuth } from "@/context/AuthContext";
 import { useModal } from "@/context/ModalContext";
+import MobileMenu from "../MobileMenu/MobileMenu";
 
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
 
   const { user, logout } = useAuth();
   const { openModal } = useModal();
@@ -32,6 +34,10 @@ export default function Header() {
     router.push("/");
   };
 
+  const onToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <header
       className={[
@@ -39,7 +45,7 @@ export default function Header() {
         isHome ? styles.headerHome : styles.headerInner,
       ].join(" ")}
     >
-      <div className={styles.container}>
+      <div className={styles.inner}>
         <Link href="/" aria-label="Nanny.Services">
           <Image
             className={styles.logo}
@@ -111,23 +117,8 @@ export default function Header() {
             <>
               <div className={styles.userBox}>
                 <span className={styles.userIcon} aria-hidden="true">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"
-                      fill="currentColor"
-                    />
-                    <path
-                      d="M4 20a8 8 0 0 1 16 0"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
+                  <svg width="36" height="36">
+                    <use href="/sprite.svg#icon-image" />
                   </svg>
                 </span>
 
@@ -146,6 +137,16 @@ export default function Header() {
             </>
           )}
         </div>
+        <MobileMenu
+          isOpen={isOpen}
+          onToggle={onToggle}
+          isAuthenticated={isAuthenticated}
+          displayName={displayName}
+          openLogin={() => openModal("login")}
+          openRegister={() => openModal("register")}
+          onLogout={onLogout}
+          currentPath={pathname || "/"}
+        />
       </div>
     </header>
   );

@@ -26,36 +26,21 @@ export default function MobileMenu({
   currentPath,
 }: MobileMenuProps) {
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-
-      const handleBackdropClick = (e: MouseEvent) => {
-        const target = e.target as HTMLElement;
-        if (target.classList.contains(styles.menuOverlay)) {
-          onToggle();
-        }
-      };
-
-      const handleEscKey = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          onToggle();
-        }
-      };
-
-      document.addEventListener("click", handleBackdropClick);
-      document.addEventListener("keydown", handleEscKey);
-
-      return () => {
-        document.removeEventListener("click", handleBackdropClick);
-        document.removeEventListener("keydown", handleEscKey);
-      };
-    } else {
-      document.body.style.overflow = "";
-    }
-
+    document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onToggle();
+    };
+
+    document.addEventListener("keydown", onEsc);
+    return () => document.removeEventListener("keydown", onEsc);
   }, [isOpen, onToggle]);
 
   const isActive = (href: string) => {
@@ -66,28 +51,31 @@ export default function MobileMenu({
   return (
     <div className={styles.mobileMenu}>
       <button
+        type="button"
         className={`${styles.burger} ${isOpen ? styles.open : ""}`}
         onClick={onToggle}
         aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
       >
-        <span className={styles.burgerLine}></span>
-        <span className={styles.burgerLine}></span>
-        <span className={styles.burgerLine}></span>
+        <span className={styles.burgerLine} />
+        <span className={styles.burgerLine} />
+        <span className={styles.burgerLine} />
       </button>
 
-      <div className={`${styles.menuOverlay} ${isOpen ? styles.show : ""}`}>
+      <div
+        className={`${styles.menuOverlay} ${isOpen ? styles.show : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!isOpen}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) onToggle();
+        }}
+      >
         <div className={styles.menuContent}>
           {isAuthenticated && (
             <div className={styles.mobileProfile}>
-              <div className={styles.mobileUserIcon}>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+              <div className={styles.mobileUserIcon} aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"
                     fill="currentColor"
@@ -100,7 +88,9 @@ export default function MobileMenu({
                   />
                 </svg>
               </div>
-              <span className={styles.mobileUserName}>{displayName}</span>
+              <span className={styles.mobileUserName} title={displayName}>
+                {displayName}
+              </span>
             </div>
           )}
 
