@@ -8,6 +8,7 @@ import Modal from "@/components/Modal/Modal";
 import styles from "./AppointmentModal.module.css";
 import { appointmentSchema } from "@/utils/validationSchema";
 import { AppointmentValues } from "@/types/nanny";
+import { useToast } from "@/components/Toast/ToastProvider";
 
 type Props = {
   isOpen: boolean;
@@ -16,7 +17,25 @@ type Props = {
   nannyAvatarUrl: string;
 };
 
-const TIME_OPTIONS = ["09 : 00", "09 : 30", "10 : 00", "10 : 30"] as const;
+function pad2(n: number) {
+  return String(n).padStart(2, "0");
+}
+
+function buildTimeOptions() {
+  const start = 9 * 60;
+  const end = 16 * 60;
+  const step = 30;
+
+  const out: string[] = [];
+  for (let m = start; m <= end; m += step) {
+    const hh = Math.floor(m / 60);
+    const mm = m % 60;
+    out.push(`${pad2(hh)} : ${pad2(mm)}`);
+  }
+  return out;
+}
+
+const TIME_OPTIONS = buildTimeOptions();
 
 export default function AppointmentModal({
   isOpen,
@@ -24,6 +43,8 @@ export default function AppointmentModal({
   nannyName,
   nannyAvatarUrl,
 }: Props) {
+  const { toast } = useToast();
+
   const form = useForm<AppointmentValues>({
     resolver: yupResolver(appointmentSchema),
     mode: "onSubmit",
@@ -31,7 +52,7 @@ export default function AppointmentModal({
       address: "",
       phone: "+380",
       childAge: "",
-      time: "09 : 30",
+      time: "", // важливо: не "00:00"
       email: "",
       parentName: "",
       comment: "",
@@ -41,7 +62,7 @@ export default function AppointmentModal({
   const [timeOpen, setTimeOpen] = useState(false);
   const timeRootRef = useRef<HTMLDivElement | null>(null);
 
-  const timeValue = useMemo(() => form.watch("time"), [form]);
+  const timeValue = form.watch("time");
 
   useEffect(() => {
     if (!isOpen) return;
@@ -76,15 +97,25 @@ export default function AppointmentModal({
     onClose();
   };
 
+  const setTime = (t: string) => {
+    form.setValue("time", t, { shouldValidate: true, shouldDirty: true });
+    setTimeOpen(false);
+  };
+
   const onSubmit = async (_values: AppointmentValues) => {
+    toast({
+      type: "success",
+      title: "Sent successfully",
+      message: "Your appointment request has been sent.",
+    });
+
     form.reset();
     onClose();
   };
 
-  const setTime = (t: (typeof TIME_OPTIONS)[number]) => {
-    form.setValue("time", t, { shouldValidate: true, shouldDirty: true });
-    setTimeOpen(false);
-  };
+  const timeLabel = useMemo(() => {
+    return timeValue ? timeValue : "Meeting time";
+  }, [timeValue]);
 
   return (
     <Modal
@@ -182,10 +213,10 @@ export default function AppointmentModal({
                 aria-haspopup="listbox"
                 aria-expanded={timeOpen}
               >
-                <span className={styles.timeText}>{timeValue}</span>
+                <span className={styles.timeText}>{timeLabel}</span>
                 <span className={styles.clock} aria-hidden="true">
-                  <svg width="18" height="18">
-                    <use href="/sprite.svg#icon-clock" />
+                  <svg width="20" height="20">
+                    <use href="/sprite.svg/#icon-clock" />
                   </svg>
                 </span>
               </button>
@@ -197,6 +228,7 @@ export default function AppointmentModal({
                   aria-label="Meeting time"
                 >
                   <p className={styles.timeTitle}>Meeting time</p>
+
                   <ul className={styles.timeList}>
                     {TIME_OPTIONS.map((t) => {
                       const active = t === timeValue;
@@ -220,6 +252,7 @@ export default function AppointmentModal({
                   </ul>
                 </div>
               )}
+
               {form.formState.errors.time?.message && (
                 <p className={styles.error}>
                   {form.formState.errors.time.message}

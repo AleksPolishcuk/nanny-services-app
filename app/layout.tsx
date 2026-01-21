@@ -6,10 +6,18 @@ import Header from "@/components/Header/Header";
 import { FavoritesProvider } from "@/context/FavoritesContext";
 import Footer from "@/components/Footer/Footer";
 import ModalManager from "@/context/ModalManager";
+import { ToastProvider } from "@/components/Toast/ToastProvider";
 
 export const metadata: Metadata = {
   title: "Nanny.Services",
   description: "Nanny services app",
+  icons: {
+    icon: [
+      {
+        url: "/public/Icon.svg",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -23,10 +31,12 @@ export default function RootLayout({
         <AuthProvider>
           <ModalProvider>
             <FavoritesProvider>
-              <Header />
-              {children}
-              <Footer />
-              <ModalManager />
+              <ToastProvider>
+                <Header />
+                {children}
+                <Footer />
+                <ModalManager />
+              </ToastProvider>
             </FavoritesProvider>
           </ModalProvider>
         </AuthProvider>

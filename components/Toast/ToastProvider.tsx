@@ -1,50 +1,77 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import styles from "./ToastProvider.module.css";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
+import styles from "./Toast.module.css";
 
-type ToastProps = {
-  message: string;
-  type?: "info" | "warning" | "error" | "success";
-  duration?: number;
-  onClose: () => void;
+type ToastType = "success" | "error";
+
+type ToastInput = {
+  type: ToastType;
+  title: string;
+  message?: string;
+  durationMs?: number;
 };
 
-export default function Toast({
-  message,
-  type = "info",
-  duration = 3000,
-  onClose,
-}: ToastProps) {
-  const [isVisible, setIsVisible] = useState(true);
+type ToastItem = ToastInput & { id: string };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-      setTimeout(onClose, 300);
-    }, duration);
+type ToastCtx = {
+  toast: (t: ToastInput) => void;
+};
 
-    return () => clearTimeout(timer);
-  }, [duration, onClose]);
+const Ctx = createContext<ToastCtx | null>(null);
+
+function uid() {
+  return `${Date.now()}_${Math.random().toString(16).slice(2)}`;
+}
+
+export function ToastProvider({ children }: { children: React.ReactNode }) {
+  const [items, setItems] = useState<ToastItem[]>([]);
+
+  const toast = useCallback((t: ToastInput) => {
+    const id = uid();
+    const durationMs = t.durationMs ?? 2400;
+
+    setItems((s) => [...s, { ...t, id, durationMs }]);
+
+    window.setTimeout(() => {
+      setItems((s) => s.filter((x) => x.id !== id));
+    }, durationMs);
+  }, []);
+
+  const value = useMemo(() => ({ toast }), [toast]);
 
   return (
-    <div
-      className={`${styles.toast} ${styles[type]} ${
-        isVisible ? styles.show : styles.hide
-      }`}
-    >
-      {message}
-      <button
-        className={styles.closeBtn}
-        onClick={() => {
-          setIsVisible(false);
-          onClose();
-        }}
-      >
-        <svg width="12" height="12" aria-hidden="true">
-          <use href="/sprite.svg#icon-close" />
-        </svg>
-      </button>
-    </div>
+    <Ctx.Provider value={value}>
+      {children}
+
+      <div className={styles.stack} role="status" aria-live="polite">
+        {items.map((t) => (
+          <div
+            key={t.id}
+            className={[
+              styles.toast,
+              t.type === "success" ? styles.success : styles.error,
+            ].join(" ")}
+          >
+            <div className={styles.titleRow}>
+              <span className={styles.title}>{t.title}</span>
+            </div>
+            {t.message ? <div className={styles.msg}>{t.message}</div> : null}
+          </div>
+        ))}
+      </div>
+    </Ctx.Provider>
   );
+}
+
+export function useToast() {
+  const v = useContext(Ctx);
+  if (!v) throw new Error("useToast must be used within ToastProvider");
+  return v;
 }

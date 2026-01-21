@@ -113,7 +113,7 @@
 
   .navLink:hover {
     transform: scale(1.03);
-    opacity: 0.95;
+    transition: all 0.2s;
   }
 
   .active {

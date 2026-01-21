@@ -96,7 +96,8 @@
 
 .cta:hover .ctaIcon {
   transform: translateX(4px) rotate(45deg);
-  opacity: 0.95;
+  /* opacity: 0.95; */
+  transition: all 0.3s;
 }
 
 .right {

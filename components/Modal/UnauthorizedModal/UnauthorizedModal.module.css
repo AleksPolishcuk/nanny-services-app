@@ -1,7 +1,8 @@
 .wrap {
   position: relative;
-  padding: 64px;
-  width: 438px;
+  padding: 64px 32px;
+  /* width: 100%; */
+  max-width: 438px;
   background: #fbfbfb;
   border-radius: 30px;
   text-align: center;
@@ -18,7 +19,7 @@
   cursor: pointer;
   display: grid;
   place-items: center;
-  color: #11101c;
+  stroke: #11101c;
 }
 
 .close:hover {
@@ -99,20 +100,18 @@
 .btnLogin:hover,
 .btnRegister:hover {
   opacity: 0.9;
-  transform: scale(1.02);
+  transform: scale(1.03);
   transition: all 0.2s;
 }
 
-@media (max-width: 520px) {
+@media (min-width: 520px) {
   .wrap {
-    width: 100%;
     padding: 40px 20px 24px;
+    max-width: 566px;
   }
-
   .title {
     font-size: 24px;
   }
-
   .description {
     font-size: 14px;
   }
