@@ -5,7 +5,7 @@ import styles from "./favorites.module.css";
 import { useAuth } from "@/context/AuthContext";
 import { useFavorites } from "@/context/FavoritesContext";
 import NannyCard from "@/components/NannyCard/NannyCard";
-import Filters from "@/components/Filters/Filters";
+import Filter from "@/components/Filters/Filters";
 import type { PriceFilter, SortOption, FilterOption } from "@/types/filters";
 import { applyFiltersAndSort } from "@/utils/sortNannies";
 
@@ -20,22 +20,27 @@ export default function FavoritesPage() {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [sort, setSort] = useState<SortOption>("SHOW_ALL");
   const [price, setPrice] = useState<PriceFilter>("ALL");
-  const [filterValue, setFilterValue] = useState<FilterOption>("ALL");
+  const [uiValue, setUiValue] = useState<FilterOption>("ALL");
 
   const onFilterChange = (v: FilterOption) => {
-    setFilterValue(v);
+    setUiValue(v);
 
     if (v === "ALL") {
       setPrice("ALL");
       setSort("SHOW_ALL");
-    } else if (v === "LT_10" || v === "GT_10") {
-      setPrice(v);
-      setSort("SHOW_ALL");
-    } else {
-      setSort(v);
-      setPrice("ALL");
+      setVisibleCount(PAGE_SIZE);
+      return;
     }
 
+    if (v === "LT_10" || v === "GT_10") {
+      setPrice(v);
+      setSort("SHOW_ALL");
+      setVisibleCount(PAGE_SIZE);
+      return;
+    }
+
+    setSort(v);
+    setPrice("ALL");
     setVisibleCount(PAGE_SIZE);
   };
 
@@ -52,69 +57,47 @@ export default function FavoritesPage() {
   }, [visibleCount, filteredItems.length]);
 
   const loadMore = () => {
-    setVisibleCount((prev) => {
-      const nextCount = prev + PAGE_SIZE;
-
-      return Math.min(nextCount, filteredItems.length);
-    });
+    setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, filteredItems.length));
   };
 
-  if (isAuthLoading) {
-    return (
-      <main className={styles.page}>
-        <div className={styles.container}>
-          <p className={styles.state}>Loading…</p>
-        </div>
-      </main>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <main className={styles.page}>
-        <div className={styles.container}>
-          <p className={styles.state}>Please log in to see favorites.</p>
-        </div>
-      </main>
-    );
-  }
-
-  if (favLoading) {
-    return (
-      <main className={styles.page}>
-        <div className={styles.container}>
-          <p className={styles.state}>Loading favorites…</p>
-        </div>
-      </main>
-    );
-  }
+  const stateText = useMemo(() => {
+    if (isAuthLoading) return "Loading…";
+    if (!isAuthenticated) return "Please log in to see favorites.";
+    if (favLoading) return "Loading favorites…";
+    if (allFavorites.length === 0) return "No favorites yet.";
+    if (filteredItems.length === 0)
+      return "No favorites match the selected filters.";
+    return null;
+  }, [
+    isAuthLoading,
+    isAuthenticated,
+    favLoading,
+    allFavorites.length,
+    filteredItems.length,
+  ]);
 
   return (
     <main className={styles.page}>
       <div className={styles.container}>
         <div className={styles.filters}>
-          <Filters value={filterValue} onChange={onFilterChange} />
+          <Filter value={uiValue} onChange={onFilterChange} />
         </div>
 
-        {allFavorites.length === 0 ? (
-          <p className={styles.state}>No favorites yet.</p>
-        ) : filteredItems.length === 0 ? (
-          <p className={styles.state}>
-            No favorites match the selected filters.
-          </p>
+        {stateText ? (
+          <p className={styles.state}>{stateText}</p>
         ) : (
           <>
             <section className={styles.list}>
-              {visibleItems.map((nanny) => (
-                <NannyCard key={nanny.id} nanny={nanny} />
+              {visibleItems.map((n) => (
+                <NannyCard key={n.id} nanny={n} />
               ))}
             </section>
 
             {hasMore && (
               <div className={styles.bottom}>
                 <button
-                  className={styles.loadMore}
                   type="button"
+                  className={styles.loadMore}
                   onClick={loadMore}
                 >
                   Load more

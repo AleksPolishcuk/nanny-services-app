@@ -1,4 +1,8 @@
 .card {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+
   border-radius: 24px;
   background: var(--bg-card);
   padding: 16px;
@@ -51,6 +55,7 @@
 
 .right {
   min-width: 0;
+  padding-right: 52px;
 }
 
 .headRow {
@@ -68,7 +73,7 @@
 .smallLabel {
   margin: 0;
   font-weight: var(--fw-medium);
-  font-size: 14px;
+  font-size: 10px;
   line-height: 1.28571;
   color: var(--text-secondary);
 }
@@ -76,7 +81,7 @@
 .name {
   margin: 0;
   font-weight: var(--fw-medium);
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: -0.01em;
   color: var(--text-primary);
@@ -85,7 +90,7 @@
 .meta {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 8px;
   width: 100%;
   flex-wrap: wrap;
 }
@@ -93,9 +98,10 @@
 .metaInfo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 2px;
   flex-wrap: wrap;
   min-width: 0;
+  margin-bottom: 12px;
 }
 
 .metaItem {
@@ -104,10 +110,13 @@
   gap: 6px;
 
   font-weight: var(--fw-medium);
-  font-size: 14px;
+  font-size: 11px;
   line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--text-primary);
+
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .metaIcon {
@@ -122,7 +131,7 @@
 
 .metaSep {
   font-weight: var(--fw-medium);
-  font-size: 14px;
+  font-size: 11px;
   line-height: 1.25;
   color: color-mix(in srgb, var(--text-primary) 20%, transparent);
 }
@@ -138,8 +147,9 @@
 }
 
 .heartBtn {
-  margin-left: auto;
-  flex: 0 0 auto;
+  position: absolute;
+  top: 16px;
+  right: 16px;
 
   width: 32px;
   height: 32px;
@@ -150,6 +160,8 @@
 
   display: grid;
   place-items: center;
+
+  z-index: 5;
 
   transition:
     transform 0.2s ease,
@@ -166,30 +178,35 @@
 }
 
 .chips {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 24px;
 }
 
 .chipsRow {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  min-width: 0;
 }
 
 .chip {
   border-radius: 24px;
   background: color-mix(in srgb, var(--bg-page) 90%, transparent);
-  padding: 8px 14px;
+  padding: 6px 10px;
 
   font-weight: var(--fw-medium);
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--text-secondary);
 
   white-space: normal;
+
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .chipStrong {
@@ -197,17 +214,27 @@
   color: var(--text-primary);
 }
 
+.chipUnderline {
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 1px;
+}
+
 .about {
-  margin: 14px 0 0;
+  margin: 0;
   font-weight: var(--fw-regular);
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.35;
   letter-spacing: -0.01em;
   color: var(--text-secondary);
+
+  overflow-wrap: anywhere;
 }
 
 .readMore {
-  margin-top: 12px;
+  margin-top: 14px;
   border: 0;
   background: transparent;
   padding: 0;
@@ -236,24 +263,27 @@
 
 .reviewItem {
   display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 12px;
+  grid-template-columns: var(--ra) 1fr;
+  column-gap: var(--rg);
+  row-gap: 8px;
   align-items: start;
+
+  min-width: 0;
 }
 
 .reviewAvatar {
-  width: 40px;
-  height: 40px;
+  width: var(--ra);
+  height: var(--ra);
   border-radius: 50%;
 
-  background: color-mix(in srgb, var(--text-primary) 12%, transparent);
+  background: rgba(16, 57, 49, 0.2);
   display: grid;
   place-items: center;
 
   font-weight: var(--fw-medium);
   font-size: 14px;
   line-height: 1.25;
-  color: var(--text-primary);
+  color: var(--primary-dark);
 }
 
 .reviewBody {
@@ -267,6 +297,8 @@
   line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--text-primary);
+
+  overflow-wrap: anywhere;
 }
 
 .reviewRating {
@@ -287,12 +319,16 @@
 }
 
 .reviewText {
-  margin: 8px 0 0;
+  grid-column: 1 / -1;
+  margin: 8px 0 0 calc(-1 * (var(--ra) + var(--rg)));
+
   font-weight: var(--fw-regular);
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.35;
   letter-spacing: -0.01em;
   color: var(--text-secondary);
+
+  overflow-wrap: anywhere;
 }
 
 .appointmentBtn {
@@ -332,6 +368,17 @@
   background: color-mix(in srgb, var(--primary-dark) 85%, #000);
 }
 
+@media (max-width: 360px) {
+  .metaItem,
+  .chip,
+  .about,
+  .reviewName,
+  .reviewText {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
 /* ========== TABLET (768+) ========== */
 @media (min-width: 768px) {
   .card {
@@ -339,6 +386,10 @@
     grid-template-columns: 120px 1fr;
     column-gap: 24px;
     row-gap: 0;
+  }
+
+  .right {
+    padding-right: 0;
   }
 
   .avatarFrame {
@@ -352,20 +403,20 @@
     border-radius: 24px;
   }
 
-  .headRow {
-    grid-template-columns: 1fr auto;
-    align-items: start;
-    row-gap: 8px;
+  .smallLabel {
+    font-size: 16px;
   }
 
   .name {
     font-size: 24px;
+    margin-bottom: 12px;
   }
 
   .meta {
     align-items: center;
     gap: 24px;
     flex-wrap: nowrap;
+    margin-bottom: 12px;
   }
 
   .metaItem,
@@ -373,25 +424,19 @@
     font-size: 16px;
   }
 
-  .chip {
-    font-size: 16px;
-    padding: 8px 16px;
-  }
-
   .about,
   .readMore,
   .reviewText {
-    font-size: 16px;
+    font-size: 12px;
     line-height: 1.25;
   }
 
-  .reviewItem {
-    grid-template-columns: 44px 1fr;
+  .heartBtn {
+    top: 20px;
+    right: 20px;
   }
 
   .reviewAvatar {
-    width: 44px;
-    height: 44px;
     font-size: 16px;
   }
 
@@ -412,13 +457,78 @@
 @media (min-width: 1024px) {
   .card {
     padding: 24px;
+    grid-template-columns: 120px 1fr;
+    column-gap: 24px;
+  }
+
+  .avatarFrame {
+    width: 120px;
+    height: 120px;
+    padding: 8px;
+    border-radius: 24px;
+  }
+
+  .avatar {
+    border-radius: 18px;
+  }
+
+  .headRow {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    row-gap: 0;
   }
 
   .meta {
+    width: auto;
+    flex-wrap: nowrap;
+    align-items: center;
     gap: 48px;
+    justify-content: flex-end;
+
+    padding-right: 72px;
   }
 
-  .right {
-    min-width: 0;
+  .titleBox {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .metaInfo {
+    flex-wrap: nowrap;
+    gap: 16px;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+
+  .chip {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+  .about,
+  .reviewText {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .readMore {
+    font-size: 16px;
+  }
+
+  .reviews {
+    margin-top: 24px;
+    gap: 24px;
+  }
+
+  .heartBtn {
+    top: 24px;
+    right: 24px;
+  }
+
+  .appointmentBtn {
+    width: 215px;
+    margin-top: 48px;
   }
 }

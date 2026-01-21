@@ -216,7 +216,7 @@ export default function AppointmentModal({
                 <span className={styles.timeText}>{timeLabel}</span>
                 <span className={styles.clock} aria-hidden="true">
                   <svg width="20" height="20">
-                    <use href="/sprite.svg/#icon-clock" />
+                    <use href="/sprite.svg#icon-clock" />
                   </svg>
                 </span>
               </button>
