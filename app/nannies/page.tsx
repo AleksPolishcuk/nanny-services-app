@@ -8,6 +8,7 @@ import NannyCard from "@/components/NannyCard/NannyCard";
 import Filter from "@/components/Filters/Filters";
 import type { PriceFilter, SortOption, FilterOption } from "@/types/filters";
 import { applyFiltersAndSort } from "@/utils/sortNannies";
+import Loader from "@/components/Loader/Loader";
 
 const PAGE_SIZE = 3;
 
@@ -82,7 +83,7 @@ export default function NanniesPage() {
           </div>
 
           {firstLoading ? (
-            <p className={styles.state}>Loading…</p>
+            <Loader />
           ) : visibleItems.length === 0 ? (
             <p className={styles.state}>No nannies found.</p>
           ) : (
@@ -101,7 +102,7 @@ export default function NanniesPage() {
                 onClick={loadMore}
                 disabled={loading}
               >
-                {loading ? "Loading…" : "Load more"}
+                {loading ? <Loader /> : "Load more"}
               </button>
             </div>
           )}

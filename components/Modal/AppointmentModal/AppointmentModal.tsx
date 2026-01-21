@@ -9,6 +9,7 @@ import styles from "./AppointmentModal.module.css";
 import { appointmentSchema } from "@/utils/validationSchema";
 import { AppointmentValues } from "@/types/nanny";
 import { useToast } from "@/components/Toast/ToastProvider";
+import Loader from "@/components/Loader/Loader";
 
 type Props = {
   isOpen: boolean;
@@ -52,7 +53,7 @@ export default function AppointmentModal({
       address: "",
       phone: "+380",
       childAge: "",
-      time: "", // важливо: не "00:00"
+      time: "",
       email: "",
       parentName: "",
       comment: "",
@@ -306,7 +307,7 @@ export default function AppointmentModal({
             type="submit"
             disabled={form.formState.isSubmitting}
           >
-            Send
+            {form.formState.isSubmitting ? <Loader /> : "Send"}
           </button>
         </form>
       </div>

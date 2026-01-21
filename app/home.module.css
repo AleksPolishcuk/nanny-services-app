@@ -88,10 +88,6 @@
   justify-content: center;
   width: 22px;
   height: 22px;
-
-  /* transition:
-    transform 0.25s ease,
-    opacity 0.25s ease; */
 }
 
 .cta:hover .ctaIcon {
@@ -104,6 +100,7 @@
   position: relative;
   min-height: 280px;
   background-image: url("/BG.jpg");
+  background-image: image-set(url("/BG.jpg") 1x, url("/BG2x.jpg") 2x);
   background-size: cover;
   background-position: center;
 }

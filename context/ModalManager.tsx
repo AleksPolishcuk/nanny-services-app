@@ -1,7 +1,7 @@
 "use client";
 
 import { useModal, isAppointmentModalData } from "@/context/ModalContext";
-import AuthModal from "@/components/AuthModal/AuthModal";
+import AuthModal from "@/components/Modal/AuthModal/AuthModal";
 import UnauthorizedModal from "@/components/Modal/UnauthorizedModal/UnauthorizedModal";
 import AppointmentModal from "@/components/Modal/AppointmentModal/AppointmentModal";
 import { useCallback } from "react";
@@ -13,7 +13,7 @@ export default function ModalManager() {
     (mode: "login" | "register") => {
       openModal(mode);
     },
-    [openModal]
+    [openModal],
   );
 
   return (

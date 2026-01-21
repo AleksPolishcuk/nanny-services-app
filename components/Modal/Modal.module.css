@@ -6,8 +6,6 @@
 
   padding: 16px;
   overflow-y: auto;
-
-  /* центруємо без margin-хаків */
   display: grid;
   place-items: center;
 }
@@ -17,8 +15,6 @@
   background: #ffffff;
   border-radius: 30px;
   box-shadow: 0 16px 60px rgba(0, 0, 0, 0.18);
-
-  /* ключове: модалка ніколи не виходить за екран */
   max-height: calc(100dvh - 32px);
   overflow: auto;
 
