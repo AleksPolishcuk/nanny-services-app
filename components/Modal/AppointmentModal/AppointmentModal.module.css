@@ -1,8 +1,9 @@
 .wrap {
   position: relative;
   padding: 64px;
-  width: 565px;
-  background: #fbfbfb;
+  width: 100%;
+  max-width: 565px;
+  background: var(--text-light);
   border-radius: 30px;
 }
 
@@ -32,7 +33,7 @@
 
 .title {
   margin: 0;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 40px;
   line-height: 1.1;
   letter-spacing: -0.01em;
@@ -81,7 +82,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.25;
-  color: #11101c;
+  color: var(--text-primary);
 }
 
 .form {
@@ -112,8 +113,8 @@
   padding: 16px 18px;
   font-size: 16px;
   line-height: 1.25;
-  color: #11101c;
-  background: #fff;
+  color: var(--text-primary);
+  background: var(--bg-card);
   box-sizing: border-box;
 }
 
@@ -125,8 +126,8 @@
   padding: 16px 18px;
   font-size: 16px;
   line-height: 1.25;
-  color: #11101c;
-  background: #fff;
+  color: var(--text-primary);
+  background: var(--bg-card);
   box-sizing: border-box;
   resize: none;
 }
@@ -144,31 +145,17 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  background: #fff;
+  background: var(--bg-card);
 }
 
 .timeText {
   font-weight: 400;
+  color: var(--text-primary);
 }
 
 .clock {
-  width: 18px;
-  height: 18px;
   display: grid;
   place-items: center;
-  color: rgba(17, 16, 28, 0.6);
-}
-
-.timeMenu {
-  position: absolute;
-  right: 0;
-  top: calc(52px + 8px);
-  width: 180px;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 20px 69px 0 rgba(0, 0, 0, 0.07);
-  padding: 14px;
-  z-index: 30;
 }
 
 .timeTitle {
@@ -176,16 +163,7 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 1.28571;
-  color: #11101c;
-}
-
-.timeList {
-  margin: 10px 0 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  color: var(--text-primary);
 }
 
 .timeItem {
@@ -204,7 +182,7 @@
 
 .timeActive,
 .timeItem:hover {
-  color: #11101c;
+  color: var(--text-primary);
 }
 
 .submit {
@@ -213,8 +191,8 @@
   height: 48px;
   border-radius: 30px;
   border: none;
-  background: #103931;
-  color: #fbfbfb;
+  background: var(--primary-dark);
+  color: var(--text-light);
   font-weight: 500;
   font-size: 16px;
   line-height: 1.25;
@@ -222,14 +200,52 @@
   cursor: pointer;
 }
 
+.submit:hover {
+  background: var(--primary-light);
+  transform: scale(1.03);
+}
+
 .submit:disabled {
   opacity: 0.8;
   cursor: not-allowed;
 }
 
+.timeMenu {
+  position: absolute;
+  right: 0;
+  top: calc(52px + 8px);
+  width: 170px;
+  border-radius: 14px;
+  background: var(--bg-card);
+  box-shadow: 0 20px 69px 0 rgba(0, 0, 0, 0.07);
+  padding: 14px;
+  z-index: 30;
+}
+
+.timeList {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  max-height: 220px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.timeList::-webkit-scrollbar {
+  width: 6px;
+}
+.timeList::-webkit-scrollbar-thumb {
+  background: rgba(17, 16, 28, 0.18);
+  border-radius: 999px;
+}
+
 @media (max-width: 640px) {
   .wrap {
-    width: 100%;
     padding: 40px 20px 24px;
   }
   .grid2 {
