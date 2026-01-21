@@ -9,7 +9,7 @@
 
 ## 🔗 Live Demo & Repository
 
-- **Live demo:** 👉 _додай посилання після деплою_
+- **Live demo:** 👉 (https://github.com/AleksPolishcuk/nanny-services-app)
 - **GitHub repo:** 👉 (https://github.com/AleksPolishcuk/nanny-services-app)
 
 ---
