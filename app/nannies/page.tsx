@@ -76,34 +76,36 @@ export default function NanniesPage() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <div className={styles.filters}>
-          <Filter value={uiValue} onChange={onFilterChange} />
-        </div>
-
-        {firstLoading ? (
-          <p className={styles.state}>Loading…</p>
-        ) : visibleItems.length === 0 ? (
-          <p className={styles.state}>No nannies found.</p>
-        ) : (
-          <section className={styles.list}>
-            {visibleItems.map((n) => (
-              <NannyCard key={n.id} nanny={n} />
-            ))}
-          </section>
-        )}
-
-        {hasMore && visibleItems.length > 0 && (
-          <div className={styles.bottom}>
-            <button
-              type="button"
-              className={styles.loadMore}
-              onClick={loadMore}
-              disabled={loading}
-            >
-              {loading ? "Loading…" : "Load more"}
-            </button>
+        <div className={styles.content}>
+          <div className={styles.filters}>
+            <Filter value={uiValue} onChange={onFilterChange} />
           </div>
-        )}
+
+          {firstLoading ? (
+            <p className={styles.state}>Loading…</p>
+          ) : visibleItems.length === 0 ? (
+            <p className={styles.state}>No nannies found.</p>
+          ) : (
+            <section className={styles.list}>
+              {visibleItems.map((n) => (
+                <NannyCard key={n.id} nanny={n} />
+              ))}
+            </section>
+          )}
+
+          {hasMore && visibleItems.length > 0 && (
+            <div className={styles.bottom}>
+              <button
+                type="button"
+                className={styles.loadMore}
+                onClick={loadMore}
+                disabled={loading}
+              >
+                {loading ? "Loading…" : "Load more"}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </main>
   );

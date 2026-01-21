@@ -1,19 +1,99 @@
+/* Footer.module.css */
+
 .footer {
   width: 100%;
   z-index: 50;
 }
 
-.container {
-  max-width: 1440px;
-  background: #103931;
-  border-radius: 30px;
-  height: 88px;
-  padding: 20px 128px;
-  margin: 0 auto;
+/* ========= HOME (/) ========= */
+.home {
+  background: var(--bg-page);
+  padding: 0 32px;
 }
 
-.text {
-  display: block;
+.home .container {
+  max-width: var(--container-max);
+  margin: 0 auto;
 
-  color: #fbfbfb;
+  height: 88px;
+  padding: 20px 24px;
+
+  background: var(--primary-dark);
+  border-radius: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========= OTHER ROUTES ========= */
+.inner {
+  background: var(--primary-dark);
+}
+
+.inner .container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+
+  height: 88px;
+  padding: 20px var(--pad-xs);
+
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* text */
+.text {
+  margin: 0;
+  color: var(--text-light);
+  text-align: center;
+
+  font-weight: var(--fw-regular);
+  font-size: 14px;
+  line-height: 1.25;
+
+  overflow-wrap: anywhere;
+}
+
+/* ========= TABLET (768+) ========= */
+@media (min-width: 768px) {
+  .home {
+    padding: 0 32px;
+  }
+
+  .home .container,
+  .inner .container {
+    padding: 20px var(--pad-sm);
+  }
+
+  .text {
+    font-size: 16px;
+  }
+}
+
+/* ========= DESKTOP (1024+) ========= */
+@media (min-width: 1024px) {
+  .home .container,
+  .inner .container {
+    padding: 20px var(--pad-md);
+  }
+}
+
+/* ========= LARGE (1280+) ========= */
+@media (min-width: 1280px) {
+  .home .container,
+  .inner .container {
+    padding: 20px var(--pad-lg);
+  }
+}
+
+/* ========= 1440+ ========= */
+@media (min-width: 1440px) {
+  .home .container,
+  .inner .container {
+    padding: 20px var(--pad-xl);
+  }
 }

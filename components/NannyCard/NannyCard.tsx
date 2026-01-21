@@ -139,7 +139,7 @@ export default function NannyCard({ nanny }: Props) {
         <div className={styles.chips}>
           <div className={styles.chipsRow}>
             <span className={styles.chip}>
-              Age: <strong className={styles.chipStrong}>{age}</strong>
+              Age: <strong className={styles.chipUnderline}>{age}</strong>
             </span>
 
             <span className={styles.chip}>
