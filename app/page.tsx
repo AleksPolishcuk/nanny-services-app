@@ -8,7 +8,6 @@ export default function HomePage() {
     <main className={styles.page}>
       <section className={styles.hero}>
         <div className={styles.heroCard}>
-          {/* LEFT */}
           <div className={styles.left}>
             <div className={styles.leftInner}>
               <h1 className={styles.title}>Make Life Easier for the Family:</h1>
@@ -30,7 +29,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* RIGHT */}
           <div className={styles.right} aria-hidden="true">
             <div className={styles.statCard}>
               <div className={styles.checkBox}>

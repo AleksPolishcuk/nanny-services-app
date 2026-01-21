@@ -12,6 +12,7 @@ import {
   type LoginFormValues,
   type RegisterFormValues,
 } from "@/utils/validationSchema";
+import Loader from "../../Loader/Loader";
 
 type Props = {
   isOpen: boolean;
@@ -215,7 +216,7 @@ export default function AuthModal({
               className={styles.submit}
               disabled={isSubmitting}
             >
-              Log In
+              {isSubmitting ? <Loader /> : "Log In"}
             </button>
 
             <div className={styles.switchRow}>
@@ -295,44 +296,11 @@ export default function AuthModal({
                 >
                   {showPassword ? (
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      />
+                      <use href="/sprite.svg#icon-eye" />
                     </svg>
                   ) : (
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M3 3l18 18"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M10.6 10.6A3 3 0 0 0 12 15a3 3 0 0 0 2.4-4.4"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M6.5 6.5C4.2 8.2 2.8 10.7 2 12c1.2 2 4.5 7 10 7 1.4 0 2.6-.3 3.7-.8"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M14.2 5.1c5.1 1.4 7.8 6.9 7.8 6.9-.4.7-1.1 1.8-2.1 2.9"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
+                      <use href="/sprite.svg#icon-eye-off" />
                     </svg>
                   )}
                 </button>

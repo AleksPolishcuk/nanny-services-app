@@ -8,6 +8,7 @@ import NannyCard from "@/components/NannyCard/NannyCard";
 import Filter from "@/components/Filters/Filters";
 import type { PriceFilter, SortOption, FilterOption } from "@/types/filters";
 import { applyFiltersAndSort } from "@/utils/sortNannies";
+import Loader from "@/components/Loader/Loader";
 
 const PAGE_SIZE = 3;
 
@@ -61,9 +62,9 @@ export default function FavoritesPage() {
   };
 
   const stateText = useMemo(() => {
-    if (isAuthLoading) return "Loading…";
+    if (isAuthLoading) return <Loader />;
     if (!isAuthenticated) return "Please log in to see favorites.";
-    if (favLoading) return "Loading favorites…";
+    if (favLoading) return <Loader />;
     if (allFavorites.length === 0) return "No favorites yet.";
     if (filteredItems.length === 0)
       return "No favorites match the selected filters.";

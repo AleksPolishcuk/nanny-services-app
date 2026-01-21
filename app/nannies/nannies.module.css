@@ -4,7 +4,7 @@
   min-height: 100vh;
 }
 
-/* wrapper */
+
 .container {
   width: 100%;
   max-width: var(--container-max);
@@ -20,14 +20,14 @@
   margin: 0 auto;
 }
 
-/* filters block */
+
 .filters {
   padding-top: 20px;
   position: relative;
   z-index: 10;
 }
 
-/* list */
+
 .list {
   margin-top: 20px;
 
@@ -38,7 +38,7 @@
   min-width: 0;
 }
 
-/* bottom */
+
 .bottom {
   display: flex;
   justify-content: center;
@@ -84,7 +84,7 @@
   cursor: not-allowed;
 }
 
-/* states */
+
 .state {
   margin: 24px 0;
   opacity: 0.75;

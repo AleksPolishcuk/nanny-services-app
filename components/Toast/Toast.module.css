@@ -11,20 +11,80 @@
 }
 
 .toast {
+  position: relative;
+  overflow: hidden;
   background: #fbfbfb;
   border-radius: 16px;
   padding: 12px 14px;
   box-shadow: 0 16px 60px rgba(0, 0, 0, 0.18);
-
   border: 1px solid rgba(17, 16, 28, 0.08);
+
+  transform: translateY(10px);
+  opacity: 0;
+  animation: toastIn 220ms ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.leaving {
+  animation: toastOut 220ms ease-in forwards;
+}
+
+.toast::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 8px;
+  height: 2px;
+  border-radius: 999px;
+
+  background: color-mix(in srgb, currentColor 18%, transparent);
+  transform-origin: left center;
+  transform: scaleX(1);
+  opacity: 0.9;
+
+  animation: toastLife var(--life, 2400ms) linear forwards;
+}
+
+@keyframes toastLife {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes toastIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(10px);
+    opacity: 0;
+  }
 }
 
 .success {
   border-left: 4px solid #103931;
+  color: #103931;
 }
 
 .error {
   border-left: 4px solid rgba(239, 68, 68, 0.95);
+  color: rgba(239, 68, 68, 0.95);
 }
 
 .titleRow {
@@ -42,6 +102,7 @@
 }
 
 .msg {
+  padding-bottom: 6px;
   margin-top: 6px;
   font-size: 13px;
   line-height: 1.35;
@@ -52,5 +113,18 @@
   .stack {
     right: 24px;
     bottom: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .leaving {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+  .toast::after {
+    animation: none;
+    transform: none;
   }
 }

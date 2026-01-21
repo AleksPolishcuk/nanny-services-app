@@ -5,7 +5,7 @@ export type Review = {
 };
 
 export type Nanny = {
-  id: string; // pushId
+  id: string;
   name: string;
   avatar_url: string;
   birthday: string;

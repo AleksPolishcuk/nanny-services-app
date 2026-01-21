@@ -1,11 +1,9 @@
-/* page */
 .page {
   background: var(--bg-page);
   min-height: calc(100vh - var(--header-h-mobile));
   font-family: var(--font-family);
 }
 
-/* wrapper */
 .container {
   width: 100%;
   max-width: var(--container-max);
@@ -13,12 +11,11 @@
   padding: 0 var(--pad-xs) 24px;
 }
 
-/* filters block */
 .filters {
   padding-top: 20px;
 }
 
-/* list */
+
 .list {
   margin-top: 20px;
   display: flex;
@@ -26,14 +23,14 @@
   gap: 12px;
 }
 
-/* states */
+
 .state {
   margin: 24px 0;
   opacity: 0.75;
   color: var(--text-primary);
 }
 
-/* bottom */
+
 .bottom {
   display: flex;
   justify-content: center;
