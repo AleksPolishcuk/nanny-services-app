@@ -70,7 +70,7 @@
 }
 
 .btnLogin {
-  border: 1px solid rgba(16, 57, 49, 0.4);
+  border: 1px solid var(--border-dark);
   border-radius: 30px;
   padding: 14px;
   font-weight: 500;
