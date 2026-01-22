@@ -154,7 +154,7 @@
 
   .btnLogin,
   .btnLogout {
-    border: 1px solid var(--border-dark);
+    border: 1px solid var(--border-light);
     background: transparent;
     color: var(--text-light);
   }
@@ -169,7 +169,7 @@
     border: 0;
     background: var(--primary-dark);
     color: var(--text-light);
-    border: 1px solid var(--border-dark);
+    border: 1px solid var(--border-light);
   }
 
   .btnLogin:hover,
