@@ -8,11 +8,11 @@
 /* ========= HOME (/) ========= */
 .home {
   background: var(--bg-page);
-  padding: 0 32px;
+  padding: 0 20px;
 }
 
 .home .container {
-  max-width: var(--container-max);
+  /* max-width: var(--container-max); */
   margin: 0 auto;
 
   height: 88px;
@@ -92,8 +92,7 @@
 
 /* ========= 1440+ ========= */
 @media (min-width: 1440px) {
-  .home .container,
+  /* .home .container,
   .inner .container {
-    padding: 20px var(--pad-xl);
-  }
+  } */
 }
