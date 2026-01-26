@@ -39,7 +39,7 @@
 
 .headerHome .inner {
   height: var(--home-header-h, var(--header-h-mobile));
-  padding: 0 24px;
+  padding: 24px 32px 0;
 }
 
 .headerInner .inner {
@@ -58,7 +58,7 @@
   }
 
   .headerHome .inner {
-    padding: 0 32px;
+    padding: 56px 48px 0;
   }
 }
 

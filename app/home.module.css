@@ -23,7 +23,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 88px;
+  top: 66px;
   height: 1px;
   background: var(--border-light);
   z-index: 5;
@@ -214,5 +214,8 @@
 @media (min-width: 1440px) {
   .leftInner {
     margin: 248px 0 0 96px;
+  }
+  .heroCard::before {
+    top: 88px;
   }
 }
