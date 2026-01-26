@@ -9,6 +9,8 @@ import { useAuth } from "@/context/AuthContext";
 import { useModal } from "@/context/ModalContext";
 import MobileMenu from "../MobileMenu/MobileMenu";
 
+
+
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
@@ -96,6 +98,7 @@ export default function Header() {
         </nav>
 
         <div className={styles.actions}>
+      
           {!isAuthenticated ? (
             <>
               <button
